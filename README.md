@@ -156,3 +156,55 @@ Umo Editor is licensed under the [MIT License](https://github.com/umodoc/editor/
 If you do not wish to retain the copyright information, please contact us or consider purchasing the commercial version: [Umo Editor Next](https://dev.umodoc.com/en/docs/next).
 
 This documentation is published under the [CC BY-NC-SA 4.0 DEED License](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en).
+
+## Local Deployment
+
+This project has been cloned and configured for local deployment with Docker.
+
+### Prerequisites
+
+The project uses premium Tiptap Pro dependencies. To install dependencies, you need a valid Tiptap Pro token.
+
+1. Get a token from [Tiptap Pro](https://tiptap.dev/pro)
+2. Update the `.npmrc` file with your token:
+   ```
+   @tiptap-pro:registry=https://registry.tiptap.dev/
+   //registry.tiptap.dev/:_authToken=YOUR_TOKEN_HERE
+   ```
+
+### Local Development
+
+1. Install dependencies:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+2. Run in development mode:
+   ```bash
+   npm run dev
+   ```
+
+3. Or build for production:
+   ```bash
+   npm run build
+   ```
+
+### Docker
+
+To run with Docker:
+
+```bash
+docker-compose up --build
+```
+
+The container will be available at `http://localhost:9000`
+
+### Production Deployment
+
+The project is configured to deploy at `umodoc.cirusdev.com` using Traefik as a reverse proxy.
+
+Make sure the `traefik_net` network is available in your system.
+
+### GitHub Repository
+
+The code is available at: https://github.com/franciscorafaelsr/umodoc-editor

@@ -3,6 +3,8 @@ version: '3.8'
 services:
   umodoc-editor:
     build: .
+    container_name: umodoc-editor
+    restart: unless-stopped
     ports:
       - "9000:9000"
     volumes:
@@ -10,3 +12,15 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.umodoc.rule=Host(`umodoc.cirusdev.com`)"
+      - "traefik.http.routers.umodoc.entrypoints=websecure"
+      - "traefik.http.routers.umodoc.tls.certresolver=letsencrypt"
+      - "traefik.http.services.umodoc.loadbalancer.server.port=9000"
+
+networks:
+  traefik_net:
+    external: true
